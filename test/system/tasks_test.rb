@@ -17,7 +17,7 @@ class TasksTest < ApplicationSystemTestCase
     fill_in "Description", with: @task.description
     fill_in "Name", with: @task.name
     fill_in "Status", with: @task.status
-    click_on "Create Task"
+    click_on "Create task"
 
     assert_text "Task was successfully created."
     click_on "Back"
@@ -30,7 +30,7 @@ class TasksTest < ApplicationSystemTestCase
     fill_in "Description", with: @task.description
     fill_in "Name", with: @task.name
     fill_in "Status", with: @task.status
-    click_on "Update Task"
+    click_on "Update task"
 
     assert_text "Task was successfully updated."
     click_on "Back"
@@ -38,7 +38,9 @@ class TasksTest < ApplicationSystemTestCase
 
   test "should destroy Task" do
     visit task_url(@task)
-    click_on "Destroy this task", match: :first
+    accept_alert do
+      click_on "Destroy this task", match: :first
+    end
 
     assert_text "Task was successfully destroyed."
   end
