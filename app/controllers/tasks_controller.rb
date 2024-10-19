@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   # GET /tasks
   def index
     @tasks = Task.all
-    render inertia: 'Task/Index', props: {
+    render inertia: "Task/Index", props: {
       tasks: @tasks.map do |task|
         serialize_task(task)
       end
@@ -15,7 +15,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1
   def show
-    render inertia: 'Task/Show', props: {
+    render inertia: "Task/Show", props: {
       task: serialize_task(@task)
     }
   end
@@ -23,14 +23,14 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-    render inertia: 'Task/New', props: {
+    render inertia: "Task/New", props: {
       task: serialize_task(@task)
     }
   end
 
   # GET /tasks/1/edit
   def edit
-    render inertia: 'Task/Edit', props: {
+    render inertia: "Task/Edit", props: {
       task: serialize_task(@task)
     }
   end
