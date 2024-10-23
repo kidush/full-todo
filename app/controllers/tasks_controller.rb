@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(created_at: :desc)
     render inertia: "Task/Index", props: {
       tasks: @tasks.map do |task|
         serialize_task(task)
@@ -40,9 +40,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
     if @task.save
-      redirect_to @task, notice: "Task was successfully created."
-    else
-      redirect_to new_task_url, inertia: { errors: @task.errors }
+      redirect_to tasks_path, notice: "Task was successfully created."
     end
   end
 
