@@ -60,19 +60,19 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:name, :description, :status)
-    end
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    def serialize_task(task)
-      task.as_json(only: [
-        :id, :name, :description, :status
-      ])
-    end
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:name, :description, :status)
+  end
+
+  def serialize_task(task)
+    task.as_json(only: [
+      :id, :name, :description, :status
+    ])
+  end
 end

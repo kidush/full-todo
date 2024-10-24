@@ -17,6 +17,9 @@ export default function Index({ tasks, flash }: IndexProps) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (data.name.trim() === '') return
+
     router.post('/tasks', data)
     reset()
   }
