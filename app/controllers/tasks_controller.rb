@@ -47,9 +47,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: "Task was successfully updated."
-    else
-      redirect_to edit_task_url(@task), inertia: { errors: @task.errors }
+      redirect_to tasks_path
     end
   end
 

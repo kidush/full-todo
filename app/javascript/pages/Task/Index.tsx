@@ -1,7 +1,7 @@
-import { Link, Head, useForm, router } from '@inertiajs/react'
+import { Head, useForm, router } from '@inertiajs/react'
 import { FlashMessage } from '../Types/FlashMessage';
 import { Task } from '../Types/Task';
-import TaskItem from './Task';
+import TaskItem from './TaskItem';
 
 type IndexProps = {
   tasks: Task[];
@@ -57,7 +57,7 @@ export default function Index({ tasks, flash }: IndexProps) {
           <ul className="divide-y divide-gray-200 px-4">
             {tasks.map((task) => (
               <li className="flex" key={task.id}>
-                <TaskItem task={task} />
+                <TaskItem key={task.id} task={task} />
               </li>
             ))}
           </ul>

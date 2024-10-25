@@ -1,5 +1,5 @@
 import { Link, Head } from '@inertiajs/react'
-import Task from './Task'
+import TaskItem from './TaskItem'
 
 export default function Show({ task, flash }) {
   const onDestroy = (e) => {
@@ -22,7 +22,7 @@ export default function Show({ task, flash }) {
 
           <h1 className="font-bold text-4xl">Task #{task.id}</h1>
 
-          <Task task={task} />
+          <TaskItem task={task} />
 
           <Link
             href={`/tasks/${task.id}/edit`}
