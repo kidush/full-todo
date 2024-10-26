@@ -46,8 +46,9 @@ RUN npm install
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Precompiling assets for production
+RUN --mount=type=secret,id=SECRET_KEY_BASE \
+    SECRET_KEY_BASE=$(cat /run/secrets/SECRET_KEY_BASE) ./bin/rails assets:precompile
 
 # Final stage for app image
 FROM base

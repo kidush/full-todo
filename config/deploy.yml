@@ -30,6 +30,9 @@ registry:
 
 builder:
   arch: amd64
+  secrets:
+    - SECRET_KEY_BASE
+
 
 env:
   clear:
