@@ -58,6 +58,6 @@ group :test do
   gem "shoulda-context"
 end
 
-gem "inertia_rails-contrib", "~> 0.2.2"
+gem "inertia_rails-contrib", "~> 0.3.0"
 
 gem "vite_rails", "~> 3.0"
