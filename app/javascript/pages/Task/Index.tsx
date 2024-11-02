@@ -2,6 +2,7 @@ import { Head, useForm, router } from '@inertiajs/react'
 import { FlashMessage } from '../Types/FlashMessage';
 import { Task } from '../Types/Task';
 import TaskItem from './TaskItem';
+import FilterButtons from '../../components/index/FilterButtons';
 
 type IndexProps = {
   tasks: Task[];
@@ -39,6 +40,9 @@ export default function Index({ tasks, flash }: IndexProps) {
 
         <div className="min-w-full">
           <div className="items-center border-b-2 border-blue-500 py-2">
+
+            <FilterButtons />
+
             <form onSubmit={onSubmit} className="flex w-full mx-auto px-4 py-2">
               <input
                 className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"

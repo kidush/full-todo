@@ -5,7 +5,14 @@ class TasksController < ApplicationController
 
   # GET /tasks
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = if params[:status].present?
+      Task.by_status(params[:status])
+    else
+      Task.all
+    end
+
+    @tasks = @tasks.order(created_at: :desc)
+
     render inertia: "Task/Index", props: {
       tasks: @tasks.map do |task|
         serialize_task(task)
