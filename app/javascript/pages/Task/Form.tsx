@@ -1,17 +1,34 @@
-import { useForm } from '@inertiajs/react'
+import { useForm } from "@inertiajs/react";
+import { ReactNode } from "react";
+import { TaskForm } from "../Types/TaskForm";
 
-export default function Form({ task, onSubmit, submitText }) {
+export default function Form({ task, onSubmit, submitText }: TaskForm) {
   const form = useForm({
-    name: task.name || '',
-    description: task.description || '',
-    status: task.status || '',
-  })
-  const { data, setData, errors, processing } = form
+    name: task.name || "",
+    description: task.description || "",
+    status: task.status || "",
+  });
+  const { data, setData, errors, processing } = form;
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    onSubmit(form)
-  }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit(form);
+  };
+
+  const fillSelect = (taskStatus: string): ReactNode => {
+    return ["pending", "complete"].map((option, index) => {
+      console.log(taskStatus);
+      return (
+        <option
+          key={index}
+          value={option}
+          selected={option === taskStatus ? true : false}
+        >
+          {option}
+        </option>
+      );
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit} className="contents">
@@ -23,11 +40,11 @@ export default function Form({ task, onSubmit, submitText }) {
           id="name"
           value={data.name}
           className="block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"
-          onChange={(e) => setData('name', e.target.value)}
+          onChange={(e) => setData("name", e.target.value)}
         />
         {errors.name && (
           <div className="text-red-500 px-3 py-2 font-medium">
-            {errors.name.join(', ')}
+            {errors.name.join(", ")}
           </div>
         )}
       </div>
@@ -40,28 +57,28 @@ export default function Form({ task, onSubmit, submitText }) {
           value={data.description}
           rows="4"
           className="block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"
-          onChange={(e) => setData('description', e.target.value)}
+          onChange={(e) => setData("description", e.target.value)}
         />
         {errors.description && (
           <div className="text-red-500 px-3 py-2 font-medium">
-            {errors.description.join(', ')}
+            {errors.description.join(", ")}
           </div>
         )}
       </div>
 
       <div className="my-5">
         <label htmlFor="status">Status</label>
-        <input
-          type="number"
-          name="status"
+        <select
           id="status"
-          value={data.status}
+          name="status"
           className="block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"
-          onChange={(e) => setData('status', e.target.value)}
-        />
+          onChange={(e) => setData("status", e.target.value)}
+        >
+          {fillSelect(data.status)}
+        </select>
         {errors.status && (
           <div className="text-red-500 px-3 py-2 font-medium">
-            {errors.status.join(', ')}
+            {errors.status.join(", ")}
           </div>
         )}
       </div>
@@ -76,5 +93,5 @@ export default function Form({ task, onSubmit, submitText }) {
         </button>
       </div>
     </form>
-  )
+  );
 }
